@@ -23,6 +23,7 @@ void setup() {
   nemoY = height/2;
   nemoscore = 0;
   calvinscore = 0;
+  frameRate ( 10 );
   
 
 }
@@ -32,7 +33,7 @@ void draw() {
   nemo();
   calvin();
   boat();
- // action();
+  action();
   messages();
   
 }
@@ -79,6 +80,9 @@ void nemo() {
   fill( 0 );
   text( "Chicken of the Sea", boatX - 15, boatY + 20 );
   text( boatscore, boatX + 45, boatY - 15 );
+  boatX = boatX + 7.5;
+  if ( boatX > width )
+     boatX = 10;
 }
 
 // calvin
@@ -96,9 +100,17 @@ void calvin() {
   rect ( calvinX + 20, calvinY + 15, 10, 10 );
 }
 
-//void action() {
-  //if nemoX < 
-  
+void action() {
+  if (dist (nemoX, nemoY, boatX, boatY) < 100) { 
+
+    calvinX = random(0, width);
+    calvinY = random(horizon, height);
+    boatscore = boatscore + 1;
+  }
+
+  nemoX =  nemoX  +  (boatX-nemoX) / 60;
+  nemoY =  nemoY  +  (boatY-nemoY) / 60;
+}
 
 void messages(){ //Text function 
   fill(0);
